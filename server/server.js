@@ -23,12 +23,13 @@ app.listen(port, () => {
 
 // Routes below here
 // Create object here which will store the numbers and history
-let equations = [{
-    num1: '',
-    operatorSign: '',
-    num2: '',
-    answer: '',
-}];
+// let equations = [{
+//     num1: '',
+//     operatorSign: '',
+//     num2: '',
+//     answer: '',
+// }];
+let equations = [];
 
 // GET
 // This is where we will get our data (equations) after receiving it from client side
@@ -48,7 +49,7 @@ app.post('/putInEquationInputs', (req,res) => {
   let firstNum = req.body.num1;
   let secondNum = req.body.num2;
   let answer = 0;
-  
+
   // calculate equation from req.body
   if (operator === '+') {
     answer = Number(firstNum) + Number(secondNum);
@@ -57,12 +58,12 @@ app.post('/putInEquationInputs', (req,res) => {
 
   // add answer to equation[] object
   req.body.answer = answer;
+  console.log('req.body after adding answer property:', req.body);
 
   // store the equation from objectToSend
   equations.push(req.body);
 
-  console.log('req.body after adding answer property:', req.body);
-
   console.log('Equations:', equations);
+
   res.sendStatus(201);
 });

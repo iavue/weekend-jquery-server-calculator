@@ -9,6 +9,8 @@ function onReady() {
     // Listener for equal button
     $('#equalBtn').on('click', sendEquation);
 
+    // Listener for clear button
+    $('#clearBtn').on('click', clearInput);
 }
 
 let operatorSign = '';
@@ -37,8 +39,6 @@ function sendEquation() {
         data: objectToSend
     }).then((response) => {
         console.log('Post finished.');
-        $('#num1Input').val('');
-        $('#num2Input').val('');
         getEquations();
     }).catch((response) => {
         alert('Request failed. Unable to send object.')
@@ -67,9 +67,24 @@ function renderToDom(incomingArray) {
 
     // Append answer to the #resultOutput
     // $('#resultOutput').empty('');
+    $('#historyOutput').empty('');
 
     for (let equation of incomingArray) {
         $('#resultOutput').empty('');
-        $('#resultOutput').append(`${equation.answer} `);
+        $('#resultOutput').append(`${equation.answer}`);
+        $('#historyOutput').append(`
+            <li>
+                ${equation.num1}
+                ${equation.operatorSign}
+                ${equation.num2}
+                ${'='}
+                ${equation.answer}
+            </li>
+        `);
     }
+}
+
+function clearInput() {
+    $('#num1Input').val('');
+    $('#num2Input').val('');
 }
