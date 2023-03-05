@@ -27,7 +27,7 @@ let equations = [{
     num1: '',
     operatorSign: '',
     num2: '',
-    answer: ''
+    answer: '',
 }];
 
 // GET
@@ -43,5 +43,21 @@ app.get('/equationInputs', (req, res) => {
 app.post('/putInEquationInputs', (req,res) => {
   console.log('in POST /putInEquationInputs', req.body);
   // data from client side will be put on req.body. So objectToSend teleported to req.body
+
+  let operator = req.body.operatorSign;
+  let firstNum = req.body.num1;
+  let secondNum = req.body.num2;
+  
+  // calculate equation from req.body
+  if (operator === '+') {
+    answer = Number(firstNum) + Number(secondNum);
+    console.log('Answer:', answer);
+  }
+
+  // store the equation from objectToSend
+  equations.push(req.body);
+  // equations.answer = answer;
+
+  console.log('Equations:', equations);
   res.sendStatus(201);
 });

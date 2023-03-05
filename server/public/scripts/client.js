@@ -37,6 +37,7 @@ function sendEquation() {
         data: objectToSend
     }).then((response) => {
         console.log('Post finished.');
+        getEquations();
     })
 }
 
