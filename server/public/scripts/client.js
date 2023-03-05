@@ -37,7 +37,11 @@ function sendEquation() {
         data: objectToSend
     }).then((response) => {
         console.log('Post finished.');
+        $('#num1Input').val('');
+        $('#num2Input').val('');
         getEquations();
+    }).catch((response) => {
+        alert('Request failed. Unable to send object.')
     })
 }
 
@@ -50,7 +54,22 @@ function getEquations() {
         url: '/equationInputs'
     }).then((response) => {
         console.log('equations data:', response);
+        // To do: append equations to DOM
+        renderToDom(response);
     }).catch((response) => {
         alert('Request failed. Unable to get equations data.')
     })
+}
+
+
+function renderToDom(incomingArray) {
+    console.log('Inside renderToDom()');
+
+    // Append answer to the #resultOutput
+    // $('#resultOutput').empty('');
+
+    for (let equation of incomingArray) {
+        $('#resultOutput').empty('');
+        $('#resultOutput').append(`${equation.answer} `);
+    }
 }

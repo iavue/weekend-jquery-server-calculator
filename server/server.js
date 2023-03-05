@@ -47,6 +47,7 @@ app.post('/putInEquationInputs', (req,res) => {
   let operator = req.body.operatorSign;
   let firstNum = req.body.num1;
   let secondNum = req.body.num2;
+  let answer = 0;
   
   // calculate equation from req.body
   if (operator === '+') {
@@ -54,9 +55,13 @@ app.post('/putInEquationInputs', (req,res) => {
     console.log('Answer:', answer);
   }
 
+  // add answer to equation[] object
+  req.body.answer = answer;
+
   // store the equation from objectToSend
   equations.push(req.body);
-  // equations.answer = answer;
+
+  console.log('req.body after adding answer property:', req.body);
 
   console.log('Equations:', equations);
   res.sendStatus(201);
