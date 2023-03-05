@@ -75,7 +75,7 @@ function sendEquation() {
 }
 
 // GET
-// This is where we get the equations from the server side
+// This is where we get-request the equations from the server side
 function getEquations() {
     $.ajax({
         method: 'GET',
